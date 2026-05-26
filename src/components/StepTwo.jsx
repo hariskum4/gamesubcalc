@@ -1,7 +1,8 @@
-import { useState, useCallback, useRef, useEffect } from 'react'
-import { SUBS, GAMES } from '../data'
+import { useState, useRef } from 'react'
+import { SUBS } from '../data'
 import { searchGames, debounce } from '../services/gameSearch'
-import { events } from '../services/analytics'
+import { events, trackEvent } from '../services/analytics'
+import SteamImport from './SteamImport'
 
 function StepTwo({ wishlist, addGame, removeGame, onNext }) {
   const [query, setQuery] = useState('')
@@ -50,17 +51,33 @@ function StepTwo({ wishlist, addGame, removeGame, onNext }) {
     events.gameAdded(game.name, game.source || 'local')
   }
 
+  const handleSteamImport = (games) => {
+    // Add up to remaining slots
+    const remaining = 10 - wishlist.length
+    const toAdd = games.slice(0, remaining)
+    toAdd.forEach(game => addGame(game))
+    trackEvent('steam_import', { imported: toAdd.length, total_available: games.length })
+  }
+
   return (
     <div>
       <div className="step-header">
         <div className="step-badge done">✓</div>
         <div>
           <div className="step-title">Your wishlist</div>
-          <div className="step-sub">Search and add up to 10 games you want to play</div>
+          <div className="step-sub">Search games or import from Steam</div>
         </div>
       </div>
 
       <div className="card">
+        {/* Steam Import */}
+        <SteamImport onImport={handleSteamImport} wishlistCount={wishlist.length} />
+
+        <div className="divider">
+          <span className="divider-text">or search manually</span>
+        </div>
+
+        {/* Manual Search */}
         <div className="search-wrap">
           <span className="search-icon">🔍</span>
           <input
@@ -86,11 +103,9 @@ function StepTwo({ wishlist, addGame, removeGame, onNext }) {
                       loading="lazy"
                     />
                   )}
-                  <span style={{ fontSize: '14px', color: 'var(--color-text-primary)' }}>
-                    {g.name}
-                  </span>
+                  <span className="game-name">{g.name}</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div className="game-row-right">
                   <div className="game-tags">
                     {g.subs && g.subs.length > 0
                       ? g.subs.map(sid => {
@@ -114,6 +129,7 @@ function StepTwo({ wishlist, addGame, removeGame, onNext }) {
           <div className="no-results">No games found for "{query}"</div>
         )}
 
+        {/* Wishlist chips */}
         <div className="wishlist-chips">
           {wishlist.map(g => (
             <div key={g.id} className="chip">
@@ -121,8 +137,11 @@ function StepTwo({ wishlist, addGame, removeGame, onNext }) {
               <button className="chip-remove" onClick={() => removeGame(g.id)} aria-label={`Remove ${g.name}`}>✕</button>
             </div>
           ))}
-          {wishlist.length < 3 && (
-            <span className="hint-text">Add at least 3 games</span>
+          {wishlist.length === 0 && (
+            <span className="hint-text">Import from Steam or search to add games</span>
+          )}
+          {wishlist.length > 0 && wishlist.length < 3 && (
+            <span className="hint-text">Add at least {3 - wishlist.length} more game{3 - wishlist.length > 1 ? 's' : ''}</span>
           )}
           {wishlist.length >= 3 && wishlist.length < 10 && (
             <span className="hint-text">{10 - wishlist.length} more slots available</span>

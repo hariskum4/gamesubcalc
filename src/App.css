@@ -569,3 +569,357 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* Steam Import */
+.steam-import {
+  background: var(--color-background-secondary);
+  border: 1px dashed var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.steam-import-done {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-style: solid;
+  border-color: #1D9E75;
+  background: #E1F5EE;
+}
+
+.steam-import-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.steam-icon {
+  font-size: 16px;
+}
+
+.steam-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.steam-done-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: #085041;
+}
+
+.steam-form {
+  display: flex;
+  gap: 8px;
+}
+
+.steam-input {
+  flex: 1;
+  padding: 9px 12px;
+  font-size: 13px;
+  border: 1px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  background: var(--color-background-primary);
+  min-width: 0;
+}
+
+.steam-input:focus {
+  border-color: var(--color-border-secondary);
+  outline: none;
+}
+
+.steam-btn {
+  padding: 9px 14px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--color-border-secondary);
+  background: var(--color-text-primary);
+  color: var(--color-background-primary);
+  font-size: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.steam-btn:hover {
+  opacity: 0.85;
+}
+
+.steam-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.steam-error {
+  font-size: 12px;
+  color: #E24B4A;
+  margin-top: 8px;
+}
+
+.steam-help {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.steam-help a {
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-tertiary);
+}
+
+.divider-text {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+}
+
+/* Game row improvements */
+.game-name {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-row-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ===========================
+   MOBILE-FIRST RESPONSIVE
+   =========================== */
+
+/* Tablets and small desktops */
+@media (max-width: 600px) {
+  .calc-wrap {
+    padding: 1rem 0;
+  }
+
+  .card {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .sub-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .sub-item {
+    padding: 10px;
+  }
+
+  .sub-name {
+    font-size: 12px;
+  }
+
+  .sub-price {
+    font-size: 11px;
+  }
+
+  .total-amount {
+    font-size: 18px;
+  }
+
+  .result-cost {
+    font-size: 26px;
+  }
+
+  .rec-amount {
+    font-size: 20px;
+  }
+
+  .step-title {
+    font-size: 15px;
+  }
+
+  .cta-btn {
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+  .sub-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .game-row-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+  }
+
+  .share-buttons .share-btn {
+    width: 100%;
+  }
+
+  .coverage-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .verdict-badge {
+    align-self: flex-end;
+  }
+
+  .chip {
+    font-size: 12px;
+    padding: 3px 8px 3px 10px;
+  }
+
+  .email-gate-desc {
+    font-size: 13px;
+  }
+
+  .steam-form {
+    flex-direction: column;
+  }
+
+  .steam-btn {
+    width: 100%;
+  }
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) and (pointer: coarse) {
+  .sub-item {
+    padding: 14px;
+    min-height: 56px;
+  }
+
+  .add-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .chip-remove {
+    padding: 4px;
+    font-size: 16px;
+  }
+
+  .cta-btn {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .share-btn {
+    padding: 14px;
+  }
+
+  .game-row {
+    padding: 12px 14px;
+  }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .calc-wrap {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Prevent zoom on input focus (iOS) */
+@media (max-width: 600px) {
+  input, select, textarea {
+    font-size: 16px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-text-tertiary: #64748b;
+    --color-background-primary: #1e293b;
+    --color-background-secondary: #0f172a;
+    --color-border-secondary: #475569;
+    --color-border-tertiary: #334155;
+  }
+
+  .sub-item.selected {
+    border-color: #1D9E75;
+    background: rgba(29, 158, 117, 0.15);
+  }
+
+  .sub-item.selected .sub-name {
+    color: #6ee7b7;
+  }
+
+  .sub-item.selected .sub-price {
+    color: #34d399;
+  }
+
+  .tag-gp {
+    background: rgba(24, 95, 165, 0.3);
+    color: #93c5fd;
+  }
+
+  .v-keep {
+    background: rgba(29, 158, 117, 0.2);
+    color: #6ee7b7;
+  }
+
+  .v-cancel {
+    background: rgba(226, 75, 74, 0.2);
+    color: #fca5a5;
+  }
+
+  .steam-import {
+    background: var(--color-background-secondary);
+    border-color: var(--color-border-tertiary);
+  }
+
+  .steam-import-done {
+    background: rgba(29, 158, 117, 0.15);
+    border-color: #1D9E75;
+  }
+
+  .steam-done-text {
+    color: #6ee7b7;
+  }
+
+  .share-btn-primary {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: #f1f5f9;
+  }
+}
